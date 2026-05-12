@@ -1,130 +1,625 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculadora Básica</title>
+<title>CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES</title>
 
 <style>
 
 body{
-font-family:Arial;
-background:#f2f2f2;
-padding:20px;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-background:white;
-padding:25px;
-border-radius:12px;
+    font-family: Arial, sans-serif;
+    background:#f3f5f7;
+    margin:0;
+    padding:20px;
+    color:#222;
 }
 
 h1{
-text-align:center;
-color:#0b2c74;
+    text-align:center;
+    color:#0b2c74;
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+.contenedor{
+    max-width:1400px;
+    margin:auto;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.12);
+}
+
+h2{
+    color:#163f8c;
+    margin-top:0;
 }
 
 label{
-display:block;
-margin-top:15px;
-font-weight:bold;
+    display:block;
+    margin-top:14px;
+    font-weight:bold;
 }
 
-input,select{
-width:100%;
-padding:10px;
-margin-top:5px;
+input, select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:16px;
 }
 
 button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#0d6efd;
-color:white;
-border:none;
-font-size:18px;
+    width:100%;
+    margin-top:25px;
+    padding:16px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0a58ca;
 }
 
 .resultado{
-margin-top:20px;
-background:#eef5ff;
-padding:20px;
-border-radius:10px;
+    margin-top:25px;
+}
+
+.bloque{
+    background:#f9fbff;
+    border-left:6px solid #0d6efd;
+    padding:18px;
+    margin-bottom:18px;
+    border-radius:8px;
+}
+
+.bloque h3{
+    margin-top:0;
+    color:#15408b;
+}
+
+.ok{
+    color:green;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.warning{
+    color:#d35400;
+    font-weight:bold;
+    font-size:20px;
+}
+
+canvas{
+    width:100%;
+    background:#fff;
+    border-radius:10px;
+}
+
+.fundamento{
+    margin-top:10px;
+    background:#eef5ff;
+    padding:10px;
+    border-radius:6px;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.info{
+    margin-top:15px;
+    background:#fff7d7;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #e7c75f;
+}
+
+@media(max-width:1000px){
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+h1{
+    font-size:28px;
+}
+
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<div class="contenedor">
 
-<h1>CALCULADORA SPLIT - BÁSICA</h1>
+<h1>CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES</h1>
 
-<label>Largo</label>
-<input type="number" id="largo">
+<div class="grid">
 
-<label>Ancho</label>
-<input type="number" id="ancho">
+<!-- FORMULARIO -->
 
-<label>Altura</label>
-<input type="number" id="altura">
+<div class="card">
 
-<label>Personas</label>
+<h2>1. RELEVAR DATOS DEL AMBIENTE</h2>
+
+<label>Largo (m)</label>
+<input type="number" id="largo" step="0.01" placeholder="Ej: 5.25">
+
+<label>Ancho (m)</label>
+<input type="number" id="ancho" step="0.01" placeholder="Ej: 3.80">
+
+<label>Altura (m)</label>
+<input type="number" id="altura" step="0.01" placeholder="Ej: 2.60">
+
+<label>Personas habituales</label>
 <input type="number" id="personas">
 
-<button onclick="calcular()">
-CALCULAR
-</button>
+<label>Ventanas con sol directo</label>
+<input type="number" id="ventanas">
 
-<div class="resultado" id="resultado"></div>
+<label>Orientación</label>
+<select id="orientacion">
+    <option>Sur</option>
+    <option>Este</option>
+    <option>Norte</option>
+    <option>Oeste</option>
+</select>
+
+<label>Equipos eléctricos</label>
+<input type="number" id="equipos">
+
+<label>Potencia del equipo instalado (W)</label>
+<input type="number" id="watts">
+
+<label>m² de superficie vidriada</label>
+<input type="number" id="vidrio" step="0.01">
+
+<label>¿Recibe sol por la tarde?</label>
+<select id="sol">
+    <option>No</option>
+    <option>Si</option>
+</select>
+
+<button onclick="calcular()">CALCULAR</button>
+
+<div class="info">
+<b>IMPORTANTE:</b><br>
+Las medidas pueden ingresarse en metros con centímetros.<br>
+Ejemplo:<br>
+5.25 = 5 metros 25 cm
+</div>
+
+</div>
+
+<!-- DIBUJO 3D -->
+
+<div class="card">
+
+<h2>ESQUEMA 3D DEL AMBIENTE</h2>
+
+<canvas id="canvas3d" width="700" height="500"></canvas>
+
+</div>
+
+</div>
+
+<!-- RESULTADOS -->
+
+<div class="card resultado">
+
+<h2>2. CÁLCULO PASO A PASO Y FUNDAMENTOS</h2>
+
+<div id="resultado"></div>
+
+</div>
 
 </div>
 
 <script>
 
+function dibujar3D(largo, ancho, altura){
+
+    const canvas = document.getElementById("canvas3d");
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    let x = 150;
+    let y = 150;
+
+    let escala = 40;
+
+    let w = largo * escala;
+    let d = ancho * escala;
+    let h = altura * escala;
+
+    // Piso
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.lineTo(x+w,y);
+    ctx.lineTo(x+w+80,y-40);
+    ctx.lineTo(x+80,y-40);
+    ctx.closePath();
+
+    ctx.fillStyle="#dfe6e9";
+    ctx.fill();
+
+    // Frente
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.lineTo(x+w,y);
+    ctx.lineTo(x+w,y+h);
+    ctx.lineTo(x,y+h);
+    ctx.closePath();
+
+    ctx.fillStyle="#f5f6fa";
+    ctx.fill();
+
+    // Costado
+    ctx.beginPath();
+    ctx.moveTo(x+w,y);
+    ctx.lineTo(x+w+80,y-40);
+    ctx.lineTo(x+w+80,y+h-40);
+    ctx.lineTo(x+w,y+h);
+    ctx.closePath();
+
+    ctx.fillStyle="#dcdde1";
+    ctx.fill();
+
+    ctx.strokeStyle="#2f3640";
+    ctx.lineWidth=2;
+
+    // líneas
+    ctx.strokeRect(x,y,w,h);
+
+    ctx.beginPath();
+    ctx.moveTo(x+w,y);
+    ctx.lineTo(x+w+80,y-40);
+    ctx.lineTo(x+w+80,y+h-40);
+    ctx.lineTo(x+w,y+h);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.lineTo(x+80,y-40);
+    ctx.lineTo(x+w+80,y-40);
+    ctx.stroke();
+
+    // MEDIDAS
+
+    ctx.fillStyle="blue";
+    ctx.font="20px Arial";
+    ctx.fillText("Largo: "+largo+" m", x+80, y+h+40);
+
+    ctx.fillStyle="green";
+    ctx.fillText("Ancho: "+ancho+" m", x+w+20, y+h+20);
+
+    ctx.fillStyle="red";
+    ctx.fillText("Altura: "+altura+" m", x-120, y+h/2);
+
+}
+
 function calcular(){
 
-let largo=
-parseFloat(document.getElementById("largo").value)||0;
+    let largo = parseFloat(document.getElementById("largo").value) || 0;
+    let ancho = parseFloat(document.getElementById("ancho").value) || 0;
+    let altura = parseFloat(document.getElementById("altura").value) || 0;
 
-let ancho=
-parseFloat(document.getElementById("ancho").value)||0;
+    let personas = parseInt(document.getElementById("personas").value) || 0;
+    let ventanas = parseInt(document.getElementById("ventanas").value) || 0;
 
-let altura=
-parseFloat(document.getElementById("altura").value)||0;
+    let orientacion = document.getElementById("orientacion").value;
 
-let personas=
-parseInt(document.getElementById("personas").value)||0;
+    let equipos = parseInt(document.getElementById("equipos").value) || 0;
 
-let superficie=largo*ancho;
+    let watts = parseFloat(document.getElementById("watts").value) || 0;
 
-let volumen=largo*ancho*altura;
+    let vidrio = parseFloat(document.getElementById("vidrio").value) || 0;
 
-let btu=superficie*600;
+    let sol = document.getElementById("sol").value;
 
-document.getElementById("resultado").innerHTML=`
+    // SUPERFICIE
+    let superficie = largo * ancho;
 
-<h2>RESULTADOS</h2>
+    // VOLUMEN
+    let volumen = largo * ancho * altura;
 
-Superficie:
-<b>${superficie.toFixed(2)} m²</b>
+    // BTU BASE
+    let btuBase = superficie * 600;
 
-<br><br>
+    // PERSONAS
+    let btuPersonas = 0;
 
-Volumen:
+    if(personas > 2){
+        btuPersonas = (personas - 2) * 600;
+    }
+
+    // VENTANAS
+    let btuVentanas = ventanas * 1000;
+
+    // VIDRIO
+    let btuVidrio = vidrio * 800;
+
+    // EQUIPOS
+    let btuEquipos = equipos * 500;
+
+    // ORIENTACION
+    let btuOrientacion = 0;
+
+    if(orientacion == "Este"){
+        btuOrientacion = 500;
+    }
+
+    if(orientacion == "Norte"){
+        btuOrientacion = 1000;
+    }
+
+    if(orientacion == "Oeste"){
+        btuOrientacion = 1500;
+    }
+
+    // SOL TARDE
+    let btuSol = 0;
+
+    if(sol == "Si"){
+        btuSol = 1500;
+    }
+
+    // TOTAL ADICIONALES
+    let adicionales =
+        btuPersonas +
+        btuVentanas +
+        btuVidrio +
+        btuEquipos +
+        btuOrientacion +
+        btuSol;
+
+    // TOTAL
+    let totalBTU = btuBase + adicionales;
+
+    // FRIGORIAS
+    let frigorias = totalBTU / 4;
+
+    // EQUIPO
+    let btuEquipo = watts * 3.412;
+
+    // DIAGNOSTICO
+
+    let textoDiagnostico = "";
+    let clase = "";
+
+    if(
+        btuEquipo >= totalBTU * 0.9 &&
+        btuEquipo <= totalBTU * 1.1
+    ){
+
+        textoDiagnostico = "✅ ADECUADO";
+        clase = "ok";
+
+    }else if(btuEquipo < totalBTU * 0.9){
+
+        textoDiagnostico =
+        "⚠️ SUBDIMENSIONADO<br><br>" +
+        "Consecuencia: trabaja forzado, consume más energía, enfría mal y reduce la vida útil del compresor.";
+
+        clase = "warning";
+
+    }else{
+
+        textoDiagnostico =
+        "⚠️ SOBREDIMENSIONADO<br><br>" +
+        "Consecuencia: ciclos cortos, mala deshumidificación y desgaste prematuro.";
+
+        clase = "warning";
+    }
+
+    // DIBUJAR
+    dibujar3D(largo, ancho, altura);
+
+    // RESULTADOS
+
+    document.getElementById("resultado").innerHTML = `
+
+<div class="bloque">
+
+<h3>1. CÁLCULO DE SUPERFICIE</h3>
+
+<b>Superficie = Largo × Ancho</b><br><br>
+
+${largo} × ${ancho} = <b>${superficie.toFixed(2)} m²</b>
+
+<div class="fundamento">
+
+<b>Fundamento:</b><br>
+
+La superficie determina la base del intercambio térmico del ambiente.
+A mayor superficie, mayor será la carga térmica necesaria para climatizar correctamente.
+
+</div>
+
+</div>
+
+<div class="bloque">
+
+<h3>2. CÁLCULO DE VOLUMEN</h3>
+
+<b>Volumen = Largo × Ancho × Altura</b><br><br>
+
+${largo} × ${ancho} × ${altura} =
 <b>${volumen.toFixed(2)} m³</b>
 
-<br><br>
+<div class="fundamento">
 
-BTU requeridos:
-<b>${btu.toFixed(0)} BTU/h</b>
+<b>Fundamento:</b><br>
+
+El volumen representa la cantidad de aire que debe acondicionarse.
+Ambientes más altos requieren mayor energía térmica.
+
+</div>
+
+</div>
+
+<div class="bloque">
+
+<h3>3. BTU BASE</h3>
+
+<b>BTU base = Superficie × 600</b><br><br>
+
+${superficie.toFixed(2)} × 600 =
+<b>${btuBase.toFixed(0)} BTU/h</b>
+
+<div class="fundamento">
+
+<b>Fundamento:</b><br>
+
+Se adopta una regla general de 600 BTU/h por m² para viviendas estándar
+con aislamiento y altura normal.
+
+</div>
+
+</div>
+
+<div class="bloque">
+
+<h3>4. FACTORES ADICIONALES</h3>
+
+✅ Personas:
+(${personas} - 2) × 600 =
+<b>${btuPersonas.toFixed(0)} BTU/h</b><br><br>
+
+✅ Ventanas con sol:
+${ventanas} × 1000 =
+<b>${btuVentanas.toFixed(0)} BTU/h</b><br><br>
+
+✅ Superficie vidriada:
+${vidrio} × 800 =
+<b>${btuVidrio.toFixed(0)} BTU/h</b><br><br>
+
+✅ Equipos eléctricos:
+${equipos} × 500 =
+<b>${btuEquipos.toFixed(0)} BTU/h</b><br><br>
+
+✅ Orientación:
+<b>${btuOrientacion.toFixed(0)} BTU/h</b><br><br>
+
+✅ Sol por la tarde:
+<b>${btuSol.toFixed(0)} BTU/h</b><br><br>
+
+<b>Total adicionales =
+${adicionales.toFixed(0)} BTU/h</b>
+
+<div class="fundamento">
+
+<b>Fundamento:</b><br>
+
+Cada factor adicional incrementa la carga térmica:
+
+<ul>
+<li>Las personas emiten calor sensible.</li>
+<li>Las ventanas reciben radiación solar.</li>
+<li>Las superficies vidriadas aumentan ganancias térmicas.</li>
+<li>Los equipos eléctricos disipan calor.</li>
+<li>La orientación Oeste y Norte reciben mayor insolación.</li>
+<li>El sol de la tarde genera máxima carga térmica.</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="bloque">
+
+<h3>5. CAPACIDAD TOTAL REQUERIDA</h3>
+
+${btuBase.toFixed(0)} + ${adicionales.toFixed(0)} =
+<b>${totalBTU.toFixed(0)} BTU/h</b>
+
+<div class="fundamento">
+
+<b>Fundamento:</b><br>
+
+La carga térmica total es la suma del BTU base más todos
+los aportes térmicos adicionales del ambiente.
+
+</div>
+
+</div>
+
+<div class="bloque">
+
+<h3>6. CONVERSIÓN A FRIGORÍAS</h3>
+
+${totalBTU.toFixed(0)} ÷ 4 =
+<b>${frigorias.toFixed(0)} frigorías/h</b>
+
+<div class="fundamento">
+
+<b>Fundamento:</b><br>
+
+1 frigoría/h ≈ 4 BTU/h.
+La conversión se utiliza para comparar capacidades comerciales.
+
+</div>
+
+</div>
+
+<div class="bloque">
+
+<h3>7. CAPACIDAD DEL EQUIPO INSTALADO</h3>
+
+${watts} × 3.412 =
+<b>${btuEquipo.toFixed(0)} BTU/h</b>
+
+<div class="fundamento">
+
+<b>Fundamento:</b><br>
+
+La potencia eléctrica consumida se convierte
+aproximadamente a capacidad térmica usando:
+
+BTU/h = Watts × 3,412
+
+</div>
+
+</div>
+
+<div class="bloque">
+
+<h3>8. DIAGNÓSTICO</h3>
+
+<div class="${clase}">
+${textoDiagnostico}
+</div>
+
+<div class="fundamento">
+
+<b>Criterio técnico:</b><br>
+
+<ul>
+<li>✅ Adecuado → Entre 90% y 110%</li>
+<li>⚠️ Subdimensionado → Menor al 90%</li>
+<li>⚠️ Sobredimensionado → Mayor al 120%</li>
+</ul>
+
+</div>
+
+</div>
 
 `;
 

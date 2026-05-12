@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
@@ -10,112 +11,70 @@
 <style>
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#eef2f7;
+margin:0;
+font-family:Arial;
+background:#eef2f7;
 }
 
 header{
-    background:#0b2c74;
-    color:white;
-    text-align:center;
-    padding:25px;
-    font-size:38px;
-    font-weight:bold;
+background:#0b2c74;
+color:white;
+text-align:center;
+padding:25px;
+font-size:38px;
+font-weight:bold;
 }
 
 .subtitulo{
-    text-align:center;
-    padding:15px;
-    font-size:20px;
-    color:#333;
+text-align:center;
+padding:20px;
+font-size:20px;
 }
 
-.selector{
-    max-width:1300px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:25px;
-    padding:30px;
+.grid{
+max-width:1300px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+padding:30px;
 }
 
 .card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 18px rgba(0,0,0,0.15);
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 5px 18px rgba(0,0,0,0.15);
 }
 
 .card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
+width:100%;
+height:220px;
+object-fit:cover;
 }
 
 .card-content{
-    padding:20px;
+padding:20px;
 }
 
 .card h2{
-    color:#0b2c74;
+color:#0b2c74;
 }
 
 .btn{
-    width:100%;
-    padding:15px;
-    background:#0d6efd;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:18px;
-    cursor:pointer;
+display:block;
+text-align:center;
+padding:15px;
+background:#0d6efd;
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-size:18px;
+margin-top:20px;
 }
 
 .btn:hover{
-    background:#084298;
-}
-
-#calculadora{
-    display:none;
-    padding:20px;
-}
-
-iframe{
-    width:100%;
-    height:95vh;
-    border:none;
-    background:white;
-    border-radius:12px;
-}
-
-.topbar{
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.topbar button{
-    padding:12px 20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-}
-
-.volver{
-    background:#6c757d;
-    color:white;
-}
-
-.pdf{
-    background:#198754;
-    color:white;
+background:#084298;
 }
 
 </style>
@@ -132,36 +91,30 @@ CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES
 Seleccione el diseño de calculadora Split
 </div>
 
-<!-- MENU -->
-
-<div class="selector" id="menu">
-
-<!-- OPCION 1 -->
+<div class="grid">
 
 <div class="card">
 
-<img src="https://images.unsplash.com/photo-1581092919535-7146ff1a5901?q=80&w=1200">
+<img src="img/opcion1.jpg">
 
 <div class="card-content">
 
 <h2>Diseño 1 - Básico</h2>
 
 <p>
-Diseño rápido y práctico.
+Calculadora rápida y simple.
 </p>
 
-<button class="btn" onclick="abrirCalculadora(1)">
+<a href="basico.html" class="btn">
 ABRIR
-</button>
+</a>
 
 </div>
 </div>
-
-<!-- OPCION 2 -->
 
 <div class="card">
 
-<img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1200">
+<img src="img/opcion2.jpg">
 
 <div class="card-content">
 
@@ -171,596 +124,33 @@ ABRIR
 Con fundamentos técnicos y análisis.
 </p>
 
-<button class="btn" onclick="abrirCalculadora(2)">
+<a href="tecnico.html" class="btn">
 ABRIR
-</button>
+</a>
 
 </div>
 </div>
-
-<!-- OPCION 3 -->
 
 <div class="card">
 
-<img src="https://images.unsplash.com/photo-1631545806521-4007db9ccd2b?q=80&w=1200">
+<img src="img/opcion3.jpg">
 
 <div class="card-content">
 
 <h2>Diseño 3 - Premium PDF</h2>
 
 <p>
-Diseño profesional con impresión PDF.
+Versión profesional con impresión PDF.
 </p>
 
-<button class="btn" onclick="abrirCalculadora(3)">
+<a href="premium.html" class="btn">
 ABRIR
-</button>
+</a>
 
 </div>
 </div>
 
 </div>
-
-<!-- CALCULADORA -->
-
-<div id="calculadora">
-
-<div class="topbar">
-
-<button class="volver" onclick="volverMenu()">
-⬅ Volver
-</button>
-
-<button class="pdf" onclick="imprimirPDF()">
-🖨 Imprimir PDF
-</button>
-
-</div>
-
-<iframe id="visor"></iframe>
-
-</div>
-
-<script>
-
-function generarCalculadora(estilo){
-
-return `
-
-<!DOCTYPE html>
-
-<html lang="es">
-
-<head>
-
-<meta charset="UTF-8">
-
-<style>
-
-body{
-font-family:Arial;
-margin:0;
-padding:20px;
-background:${estilo == 1 ? "#f2f2f2" : estilo == 2 ? "#eef5ff" : "#f3f5f7"};
-}
-
-h1{
-text-align:center;
-color:#0b2c74;
-}
-
-.container{
-max-width:1400px;
-margin:auto;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-
-.panel{
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 3px 12px rgba(0,0,0,0.12);
-}
-
-label{
-display:block;
-margin-top:12px;
-font-weight:bold;
-}
-
-input,select{
-width:100%;
-padding:10px;
-margin-top:6px;
-border-radius:6px;
-border:1px solid #ccc;
-}
-
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#0d6efd;
-color:white;
-border:none;
-border-radius:8px;
-font-size:18px;
-cursor:pointer;
-}
-
-canvas{
-width:100%;
-background:white;
-border-radius:10px;
-}
-
-.resultado{
-margin-top:20px;
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 3px 12px rgba(0,0,0,0.12);
-}
-
-.bloque{
-background:#f8fbff;
-padding:15px;
-border-left:5px solid #0d6efd;
-margin-bottom:15px;
-border-radius:8px;
-}
-
-.ok{
-color:green;
-font-weight:bold;
-font-size:20px;
-}
-
-.warning{
-color:#d35400;
-font-weight:bold;
-font-size:20px;
-}
-
-@media print{
-
-button{
-display:none;
-}
-
-body{
-background:white;
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<h1>CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES</h1>
-
-<div class="container">
-
-<div class="grid">
-
-<div class="panel">
-
-<h2>RELEVAMIENTO DEL AMBIENTE</h2>
-
-<label>Largo (m)</label>
-<input type="number" id="largo" step="0.01">
-
-<label>Ancho (m)</label>
-<input type="number" id="ancho" step="0.01">
-
-<label>Altura (m)</label>
-<input type="number" id="altura" step="0.01">
-
-<label>Personas habituales</label>
-<input type="number" id="personas">
-
-<label>Ventanas con sol directo</label>
-<input type="number" id="ventanas">
-
-<label>Orientación</label>
-<select id="orientacion">
-<option>Sur</option>
-<option>Este</option>
-<option>Norte</option>
-<option>Oeste</option>
-</select>
-
-<label>Equipos eléctricos</label>
-<input type="number" id="equipos">
-
-<label>Potencia equipo instalado (W)</label>
-<input type="number" id="watts">
-
-<label>Superficie vidriada (m²)</label>
-<input type="number" id="vidrio" step="0.01">
-
-<label>¿Sol por la tarde?</label>
-<select id="sol">
-<option>No</option>
-<option>Si</option>
-</select>
-
-<button onclick="calcular()">
-CALCULAR
-</button>
-
-</div>
-
-<div class="panel">
-
-<h2>ESQUEMA 3D</h2>
-
-<canvas id="canvas3d" width="600" height="450"></canvas>
-
-</div>
-
-</div>
-
-<div class="resultado">
-
-<h2>RESULTADOS Y FUNDAMENTOS</h2>
-
-<div id="resultado"></div>
-
-</div>
-
-</div>
-
-<script>
-
-function dibujar3D(largo,ancho,altura){
-
-let canvas=document.getElementById("canvas3d");
-let ctx=canvas.getContext("2d");
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-let x=120;
-let y=120;
-
-let escala=40;
-
-let w=largo*escala;
-let d=ancho*escala;
-let h=altura*escala;
-
-ctx.fillStyle="#dfe6e9";
-
-ctx.beginPath();
-ctx.moveTo(x,y);
-ctx.lineTo(x+w,y);
-ctx.lineTo(x+w+80,y-40);
-ctx.lineTo(x+80,y-40);
-ctx.closePath();
-ctx.fill();
-
-ctx.fillStyle="#f5f6fa";
-
-ctx.fillRect(x,y,w,h);
-
-ctx.fillStyle="#dcdde1";
-
-ctx.beginPath();
-ctx.moveTo(x+w,y);
-ctx.lineTo(x+w+80,y-40);
-ctx.lineTo(x+w+80,y+h-40);
-ctx.lineTo(x+w,y+h);
-ctx.closePath();
-ctx.fill();
-
-ctx.strokeStyle="#2f3640";
-ctx.lineWidth=2;
-
-ctx.strokeRect(x,y,w,h);
-
-ctx.beginPath();
-ctx.moveTo(x+w,y);
-ctx.lineTo(x+w+80,y-40);
-ctx.lineTo(x+w+80,y+h-40);
-ctx.lineTo(x+w,y+h);
-ctx.stroke();
-
-ctx.beginPath();
-ctx.moveTo(x,y);
-ctx.lineTo(x+80,y-40);
-ctx.lineTo(x+w+80,y-40);
-ctx.stroke();
-
-ctx.fillStyle="blue";
-ctx.font="18px Arial";
-ctx.fillText("Largo: "+largo+" m",x+70,y+h+35);
-
-ctx.fillStyle="green";
-ctx.fillText("Ancho: "+ancho+" m",x+w+10,y+h);
-
-ctx.fillStyle="red";
-ctx.fillText("Altura: "+altura+" m",x-100,y+h/2);
-
-}
-
-function calcular(){
-
-let largo=parseFloat(document.getElementById("largo").value)||0;
-let ancho=parseFloat(document.getElementById("ancho").value)||0;
-let altura=parseFloat(document.getElementById("altura").value)||0;
-
-let personas=parseInt(document.getElementById("personas").value)||0;
-let ventanas=parseInt(document.getElementById("ventanas").value)||0;
-
-let orientacion=document.getElementById("orientacion").value;
-
-let equipos=parseInt(document.getElementById("equipos").value)||0;
-
-let watts=parseFloat(document.getElementById("watts").value)||0;
-
-let vidrio=parseFloat(document.getElementById("vidrio").value)||0;
-
-let sol=document.getElementById("sol").value;
-
-// SUPERFICIE
-
-let superficie=largo*ancho;
-
-// VOLUMEN
-
-let volumen=largo*ancho*altura;
-
-// BTU BASE
-
-let btuBase=superficie*600;
-
-// PERSONAS
-
-let btuPersonas=0;
-
-if(personas>2){
-
-btuPersonas=(personas-2)*600;
-
-}
-
-// VENTANAS
-
-let btuVentanas=ventanas*1000;
-
-// VIDRIO
-
-let btuVidrio=vidrio*800;
-
-// EQUIPOS
-
-let btuEquipos=equipos*500;
-
-// ORIENTACION
-
-let btuOrientacion=0;
-
-if(orientacion=="Este"){
-btuOrientacion=500;
-}
-
-if(orientacion=="Norte"){
-btuOrientacion=1000;
-}
-
-if(orientacion=="Oeste"){
-btuOrientacion=1500;
-}
-
-// SOL TARDE
-
-let btuSol=0;
-
-if(sol=="Si"){
-btuSol=1500;
-}
-
-// ADICIONALES
-
-let adicionales=
-btuPersonas+
-btuVentanas+
-btuVidrio+
-btuEquipos+
-btuOrientacion+
-btuSol;
-
-// TOTAL
-
-let totalBTU=btuBase+adicionales;
-
-// FRIGORIAS
-
-let frigorias=totalBTU/4;
-
-// EQUIPO
-
-let btuEquipo=watts*3.412;
-
-// DIAGNOSTICO
-
-let diagnostico="";
-let clase="";
-
-if(
-btuEquipo>=totalBTU*0.9 &&
-btuEquipo<=totalBTU*1.1
-){
-
-diagnostico="✅ ADECUADO";
-clase="ok";
-
-}else if(btuEquipo<totalBTU*0.9){
-
-diagnostico="⚠️ SUBDIMENSIONADO";
-clase="warning";
-
-}else{
-
-diagnostico="⚠️ SOBREDIMENSIONADO";
-clase="warning";
-
-}
-
-// DIBUJO
-
-dibujar3D(largo,ancho,altura);
-
-// RESULTADOS
-
-document.getElementById("resultado").innerHTML=`
-
-<div class="bloque">
-
-<h3>1. SUPERFICIE</h3>
-
-${largo} × ${ancho} =
-<b>${superficie.toFixed(2)} m²</b>
-
-</div>
-
-<div class="bloque">
-
-<h3>2. VOLUMEN</h3>
-
-${largo} × ${ancho} × ${altura} =
-<b>${volumen.toFixed(2)} m³</b>
-
-</div>
-
-<div class="bloque">
-
-<h3>3. BTU BASE</h3>
-
-${superficie.toFixed(2)} × 600 =
-<b>${btuBase.toFixed(0)} BTU/h</b>
-
-</div>
-
-<div class="bloque">
-
-<h3>4. FACTORES ADICIONALES</h3>
-
-Personas:
-${btuPersonas.toFixed(0)} BTU/h
-<br><br>
-
-Ventanas:
-${btuVentanas.toFixed(0)} BTU/h
-<br><br>
-
-Vidrios:
-${btuVidrio.toFixed(0)} BTU/h
-<br><br>
-
-Equipos:
-${btuEquipos.toFixed(0)} BTU/h
-<br><br>
-
-Orientación:
-${btuOrientacion.toFixed(0)} BTU/h
-<br><br>
-
-Sol tarde:
-${btuSol.toFixed(0)} BTU/h
-<br><br>
-
-<b>Total adicionales:
-${adicionales.toFixed(0)} BTU/h</b>
-
-</div>
-
-<div class="bloque">
-
-<h3>5. TOTAL REQUERIDO</h3>
-
-${btuBase.toFixed(0)} +
-${adicionales.toFixed(0)} =
-<b>${totalBTU.toFixed(0)} BTU/h</b>
-
-</div>
-
-<div class="bloque">
-
-<h3>6. FRIGORÍAS</h3>
-
-${totalBTU.toFixed(0)} ÷ 4 =
-<b>${frigorias.toFixed(0)} fg/h</b>
-
-</div>
-
-<div class="bloque">
-
-<h3>7. EQUIPO INSTALADO</h3>
-
-${watts} × 3.412 =
-<b>${btuEquipo.toFixed(0)} BTU/h</b>
-
-</div>
-
-<div class="bloque">
-
-<h3>8. DIAGNÓSTICO</h3>
-
-<div class="${clase}">
-${diagnostico}
-</div>
-
-</div>
-
-`;
-
-}
-
-</script>
-
-</body>
-</html>
-
-`;
-
-}
-
-function abrirCalculadora(tipo){
-
-document.getElementById("menu").style.display="none";
-
-document.getElementById("calculadora").style.display="block";
-
-document.getElementById("visor").srcdoc=
-generarCalculadora(tipo);
-
-}
-
-function volverMenu(){
-
-document.getElementById("menu").style.display="grid";
-
-document.getElementById("calculadora").style.display="none";
-
-}
-
-function imprimirPDF(){
-
-document.getElementById("visor")
-.contentWindow.print();
-
-}
-
-</script>
 
 </body>
 </html>

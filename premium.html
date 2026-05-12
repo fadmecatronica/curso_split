@@ -1,60 +1,272 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculadora Básica</title>
+<title>CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES</title>
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
 body{
-font-family:Arial;
-background:#f2f2f2;
-padding:20px;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+background:#eef3f8;
+color:#222;
+}
+
+header{
+background:#0d2f73;
+color:white;
+text-align:center;
+padding:25px;
+font-size:42px;
+font-weight:bold;
+border-bottom:5px solid #2d6cdf;
 }
 
 .container{
-max-width:900px;
+max-width:1800px;
 margin:auto;
+padding:15px;
+}
+
+.top-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-bottom:15px;
+}
+
+.card{
 background:white;
-padding:25px;
-border-radius:12px;
+border-radius:10px;
+border:1px solid #cfd8e3;
+overflow:hidden;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
-h1{
-text-align:center;
-color:#0b2c74;
+.card-title{
+background:#f1f5fb;
+padding:15px;
+font-size:18px;
+font-weight:bold;
+color:#1b2d5a;
+border-bottom:1px solid #d8e2ef;
 }
 
-label{
-display:block;
-margin-top:15px;
+.form-body{
+padding:15px;
+}
+
+.form-row{
+display:grid;
+grid-template-columns:220px 1fr 70px;
+align-items:center;
+margin-bottom:10px;
+gap:10px;
+}
+
+.form-row label{
 font-weight:bold;
 }
 
-input,select{
-width:100%;
+.form-row input,
+.form-row select{
 padding:10px;
-margin-top:5px;
+border:1px solid #cfd6df;
+border-radius:5px;
+font-size:16px;
 }
 
-button{
+.form-row span{
+font-size:14px;
+color:#333;
+}
+
+.btn{
 width:100%;
 padding:15px;
-margin-top:20px;
-background:#0d6efd;
+background:#0c6de8;
 color:white;
+font-size:24px;
 border:none;
-font-size:18px;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
+font-weight:bold;
 }
 
-.resultado{
-margin-top:20px;
-background:#eef5ff;
-padding:20px;
+.btn:hover{
+background:#0957ba;
+}
+
+.result-card{
+background:white;
+border:1px solid #cfd8e3;
 border-radius:10px;
+overflow:hidden;
+margin-top:15px;
+}
+
+.result-title{
+background:#dfeaf8;
+padding:12px;
+font-size:18px;
+font-weight:bold;
+color:#1c3370;
+border-bottom:1px solid #c8d7ea;
+}
+
+.result-body{
+padding:15px;
+}
+
+.section{
+border:1px solid #d5dde7;
+border-radius:8px;
+margin-bottom:12px;
+overflow:hidden;
+}
+
+.section-header{
+background:#f4f8fd;
+padding:10px;
+font-size:20px;
+font-weight:bold;
+color:#1f4f1f;
+border-bottom:1px solid #d5dde7;
+}
+
+.section-content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:15px;
+}
+
+.box{
+background:#fdfdfd;
+border:1px solid #dfe5ec;
+padding:15px;
+border-radius:6px;
+}
+
+.big{
+font-size:28px;
+font-weight:bold;
+color:#0d2f73;
+}
+
+.total-box{
+background:#edf5ff;
+padding:15px;
+border-radius:8px;
+border:2px solid #9dc0f7;
+font-size:22px;
+font-weight:bold;
+margin-top:15px;
+}
+
+.ok{
+color:#0f8b2d;
+font-weight:bold;
+font-size:28px;
+}
+
+.warning{
+color:#d35400;
+font-weight:bold;
+font-size:28px;
+}
+
+.flow{
+padding:20px;
+text-align:center;
+}
+
+.flow-step{
+background:white;
+border:2px solid #b7c6db;
+border-radius:12px;
+padding:12px;
+margin-bottom:20px;
+font-weight:bold;
+}
+
+.arrow{
+font-size:28px;
+margin-bottom:15px;
+}
+
+canvas{
+width:100%;
+background:white;
+border-radius:10px;
+}
+
+.info{
+background:#fff7e7;
+border:1px solid #e3b85b;
+padding:12px;
+border-radius:8px;
+margin-top:10px;
+font-size:15px;
+}
+
+.footer{
+background:#edf8ed;
+border:1px solid #a7d1a7;
+padding:18px;
+border-radius:10px;
+margin-top:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+}
+
+.print{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#198754;
+color:white;
+border:none;
+padding:15px 25px;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+@media(max-width:1200px){
+
+.top-grid{
+grid-template-columns:1fr;
+}
+
+.section-content{
+grid-template-columns:1fr;
+}
+
+}
+
+@media print{
+
+.print{
+display:none;
+}
+
+body{
+background:white;
+}
+
 }
 
 </style>
@@ -63,72 +275,647 @@ border-radius:10px;
 
 <body>
 
+<header>
+CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES
+</header>
+
 <div class="container">
 
-<h1>CALCULADORA SPLIT - BÁSICA</h1>
+<div class="top-grid">
 
+<!-- FORMULARIO -->
+
+<div class="card">
+
+<div class="card-title">
+1. INICIO - RELEVAR DATOS DEL AMBIENTE
+</div>
+
+<div class="form-body">
+
+<div class="form-row">
 <label>Largo</label>
-<input type="number" id="largo">
+<input type="number" id="largo" step="0.01" value="5.20">
+<span>m</span>
+</div>
 
+<div class="form-row">
 <label>Ancho</label>
-<input type="number" id="ancho">
+<input type="number" id="ancho" step="0.01" value="3.80">
+<span>m</span>
+</div>
 
+<div class="form-row">
 <label>Altura</label>
-<input type="number" id="altura">
+<input type="number" id="altura" step="0.01" value="2.60">
+<span>m</span>
+</div>
 
-<label>Personas</label>
-<input type="number" id="personas">
+<div class="form-row">
+<label>Personas habituales</label>
+<input type="number" id="personas" value="4">
+<span>personas</span>
+</div>
 
-<button onclick="calcular()">
-CALCULAR
-</button>
+<div class="form-row">
+<label>Ventanas con sol directo</label>
+<input type="number" id="ventanas" value="2">
+<span>ventanas</span>
+</div>
 
-<div class="resultado" id="resultado"></div>
+<div class="form-row">
+<label>Orientación</label>
+
+<select id="orientacion">
+<option>Sur</option>
+<option>Este</option>
+<option>Norte</option>
+<option selected>Oeste</option>
+</select>
+
+<span></span>
 
 </div>
 
+<div class="form-row">
+<label>Equipos eléctricos</label>
+<input type="number" id="equipos" value="3">
+<span>equipos</span>
+</div>
+
+<div class="form-row">
+<label>Potencia equipo instalado</label>
+<input type="number" id="watts" value="3500">
+<span>W</span>
+</div>
+
+<div class="form-row">
+<label>Superficie vidriada grande</label>
+
+<select id="vidrio">
+<option>No</option>
+<option selected>Si</option>
+</select>
+
+<span></span>
+
+</div>
+
+<button class="btn" onclick="calcular()">
+CALCULAR
+</button>
+
+</div>
+</div>
+
+<!-- ESQUEMA -->
+
+<div class="card">
+
+<div class="card-title">
+ESQUEMA 3D DEL AMBIENTE
+</div>
+
+<div style="padding:15px">
+
+<canvas id="canvas3d" width="700" height="450"></canvas>
+
+<div class="info">
+Las medidas deben ingresarse en metros (m)
+con centímetros.
+Ejemplo:
+5.25 = 5 metros 25 centímetros.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RESULTADOS -->
+
+<div class="result-card">
+
+<div class="result-title">
+2. CÁLCULO PASO A PASO Y FUNDAMENTOS
+</div>
+
+<div class="result-body">
+
+<div id="resultado"></div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+<div>
+<h2 style="color:#1f6a1f;margin:0">
+9. CONCLUSIÓN
+</h2>
+
+<p style="font-size:20px">
+El relevamiento de carga térmica permite determinar con precisión
+la capacidad necesaria del equipo Split.
+</p>
+</div>
+
+<div style="font-size:90px">
+❄️
+</div>
+
+</div>
+
+</div>
+
+<button class="print" onclick="window.print()">
+🖨 IMPRIMIR PDF
+</button>
+
 <script>
+
+function dibujar3D(largo,ancho,altura){
+
+let canvas=document.getElementById("canvas3d");
+
+let ctx=canvas.getContext("2d");
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+let x=120;
+let y=120;
+
+let w=largo*55;
+let d=ancho*40;
+let h=altura*55;
+
+// TECHO
+
+ctx.fillStyle="#f2f2f2";
+
+ctx.beginPath();
+ctx.moveTo(x,y);
+ctx.lineTo(x+w,y);
+ctx.lineTo(x+w+120,y-60);
+ctx.lineTo(x+120,y-60);
+ctx.closePath();
+ctx.fill();
+
+ctx.stroke();
+
+// FRENTE
+
+ctx.fillStyle="#ffffff";
+ctx.fillRect(x,y,w,h);
+
+ctx.strokeRect(x,y,w,h);
+
+// LATERAL
+
+ctx.fillStyle="#ececec";
+
+ctx.beginPath();
+ctx.moveTo(x+w,y);
+ctx.lineTo(x+w+120,y-60);
+ctx.lineTo(x+w+120,y+h-60);
+ctx.lineTo(x+w,y+h);
+ctx.closePath();
+ctx.fill();
+
+ctx.stroke();
+
+// LINEAS
+
+ctx.beginPath();
+ctx.moveTo(x,y);
+ctx.lineTo(x+120,y-60);
+ctx.lineTo(x+w+120,y-60);
+ctx.stroke();
+
+// MEDIDAS
+
+ctx.fillStyle="blue";
+ctx.font="24px Arial";
+ctx.fillText("Largo",x+150,y+h+50);
+
+ctx.fillStyle="green";
+ctx.fillText("Ancho",x+w+70,y+h/2);
+
+ctx.fillStyle="red";
+ctx.fillText("Altura",x-100,y+h/2);
+
+}
 
 function calcular(){
 
-let largo=
-parseFloat(document.getElementById("largo").value)||0;
+let largo=parseFloat(document.getElementById("largo").value)||0;
 
-let ancho=
-parseFloat(document.getElementById("ancho").value)||0;
+let ancho=parseFloat(document.getElementById("ancho").value)||0;
 
-let altura=
-parseFloat(document.getElementById("altura").value)||0;
+let altura=parseFloat(document.getElementById("altura").value)||0;
 
-let personas=
-parseInt(document.getElementById("personas").value)||0;
+let personas=parseInt(document.getElementById("personas").value)||0;
+
+let ventanas=parseInt(document.getElementById("ventanas").value)||0;
+
+let orientacion=document.getElementById("orientacion").value;
+
+let equipos=parseInt(document.getElementById("equipos").value)||0;
+
+let watts=parseFloat(document.getElementById("watts").value)||0;
+
+let vidrio=document.getElementById("vidrio").value;
+
+// SUPERFICIE
 
 let superficie=largo*ancho;
 
+// VOLUMEN
+
 let volumen=largo*ancho*altura;
 
-let btu=superficie*600;
+// BTU BASE
+
+let btuBase=superficie*600;
+
+// PERSONAS
+
+let btuPersonas=0;
+
+if(personas>2){
+
+btuPersonas=(personas-2)*600;
+
+}
+
+// VENTANAS
+
+let btuVentanas=ventanas*1000;
+
+// ORIENTACION
+
+let btuOrientacion=0;
+
+if(orientacion=="Este"){
+btuOrientacion=btuBase*0.05;
+}
+
+if(orientacion=="Norte"){
+btuOrientacion=btuBase*0.10;
+}
+
+if(orientacion=="Oeste"){
+btuOrientacion=btuBase*0.10;
+}
+
+// EQUIPOS
+
+let btuEquipos=equipos*500;
+
+// VIDRIOS
+
+let btuVidrio=0;
+
+if(vidrio=="Si"){
+btuVidrio=btuBase*0.10;
+}
+
+// TOTALES
+
+let adicionales=
+btuPersonas+
+btuVentanas+
+btuOrientacion+
+btuEquipos+
+btuVidrio;
+
+let totalBTU=
+btuBase+
+adicionales;
+
+let frigorias=
+totalBTU/4;
+
+let btuEquipo=
+watts*3.412;
+
+// DIAGNOSTICO
+
+let relacion=
+btuEquipo/totalBTU;
+
+let diagnostico="";
+let clase="";
+
+if(relacion>=0.9 && relacion<=1.1){
+
+diagnostico="✅ ADECUADO";
+clase="ok";
+
+}else if(relacion<0.9){
+
+diagnostico="⚠️ SUBDIMENSIONADO";
+clase="warning";
+
+}else{
+
+diagnostico="⚠️ SOBREDIMENSIONADO";
+clase="warning";
+
+}
+
+dibujar3D(largo,ancho,altura);
 
 document.getElementById("resultado").innerHTML=`
 
-<h2>RESULTADOS</h2>
+<div class="section">
 
-Superficie:
-<b>${superficie.toFixed(2)} m²</b>
+<div class="section-header">
+1. CÁLCULO DE SUPERFICIE
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+<div class="big">
+${largo} × ${ancho}
+=
+${superficie.toFixed(2)} m²
+</div>
+
+</div>
+
+<div class="box">
+
+Fundamento:
+La superficie del piso determina la base
+de intercambio térmico con el ambiente.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-header">
+2. CÁLCULO DE VOLUMEN
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+<div class="big">
+${largo} × ${ancho} × ${altura}
+=
+${volumen.toFixed(2)} m³
+</div>
+
+</div>
+
+<div class="box">
+
+Fundamento:
+El volumen define la cantidad de aire
+a acondicionar.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-header">
+3. BTU BASE
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+<div class="big">
+${superficie.toFixed(2)} × 600
+=
+${btuBase.toFixed(0)} BTU/h
+</div>
+
+</div>
+
+<div class="box">
+
+Fundamento:
+Se adopta 600 BTU/h por m² como regla general.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-header">
+4. FACTORES ADICIONALES
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+Personas:
+<b>${btuPersonas.toFixed(0)} BTU/h</b>
 
 <br><br>
 
-Volumen:
-<b>${volumen.toFixed(2)} m³</b>
+Ventanas:
+<b>${btuVentanas.toFixed(0)} BTU/h</b>
 
 <br><br>
 
-BTU requeridos:
-<b>${btu.toFixed(0)} BTU/h</b>
+Orientación:
+<b>${btuOrientacion.toFixed(0)} BTU/h</b>
+
+<br><br>
+
+Equipos:
+<b>${btuEquipos.toFixed(0)} BTU/h</b>
+
+<br><br>
+
+Vidrios:
+<b>${btuVidrio.toFixed(0)} BTU/h</b>
+
+<br><br>
+
+<div class="total-box">
+TOTAL ADICIONALES:
+${adicionales.toFixed(0)} BTU/h
+</div>
+
+</div>
+
+<div class="box">
+
+Fundamentos:
+<br><br>
+
+• Personas aportan calor sensible.
+<br><br>
+
+• Ventanas aumentan radiación solar.
+<br><br>
+
+• Equipos eléctricos disipan calor.
+<br><br>
+
+• Orientación Oeste/Norte aumenta carga térmica.
+<br><br>
+
+• Superficie vidriada incrementa ganancias térmicas.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-header">
+5. TOTAL BTU REQUERIDO
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+<div class="big">
+${btuBase.toFixed(0)}
++
+${adicionales.toFixed(0)}
+=
+${totalBTU.toFixed(0)} BTU/h
+</div>
+
+</div>
+
+<div class="box">
+
+Capacidad térmica total requerida del ambiente.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-header">
+6. CONVERSIÓN A FRIGORÍAS
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+<div class="big">
+${totalBTU.toFixed(0)} ÷ 4
+=
+${frigorias.toFixed(0)} fg/h
+</div>
+
+</div>
+
+<div class="box">
+
+1 frigoría ≈ 4 BTU/h
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-header">
+7. CAPACIDAD DEL EQUIPO INSTALADO
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+<div class="big">
+${watts} × 3.412
+=
+${btuEquipo.toFixed(0)} BTU/h
+</div>
+
+</div>
+
+<div class="box">
+
+Conversión de potencia eléctrica a potencia térmica.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-header">
+8. DIAGNÓSTICO
+</div>
+
+<div class="section-content">
+
+<div class="box">
+
+<div class="${clase}">
+${diagnostico}
+</div>
+
+<br>
+
+Relación:
+<b>
+${(relacion*100).toFixed(0)}%
+</b>
+
+</div>
+
+<div class="box">
+
+Si el equipo es menor al 90%:
+subdimensionado.
+
+<br><br>
+
+Si supera el 120%:
+sobredimensionado.
+
+</div>
+
+</div>
+
+</div>
 
 `;
 
 }
+
+calcular();
 
 </script>
 

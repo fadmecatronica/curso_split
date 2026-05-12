@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +11,7 @@
 
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#eef2f7;
 }
 
@@ -31,10 +32,10 @@ header{
 }
 
 .selector{
-    max-width:1200px;
+    max-width:1300px;
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
     gap:25px;
     padding:30px;
 }
@@ -53,7 +54,7 @@ header{
 
 .card img{
     width:100%;
-    height:240px;
+    height:220px;
     object-fit:cover;
 }
 
@@ -62,7 +63,6 @@ header{
 }
 
 .card h2{
-    margin-top:0;
     color:#0b2c74;
 }
 
@@ -91,7 +91,7 @@ iframe{
     height:95vh;
     border:none;
     background:white;
-    border-radius:10px;
+    border-radius:12px;
 }
 
 .topbar{
@@ -119,6 +119,7 @@ iframe{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -128,10 +129,10 @@ CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES
 </header>
 
 <div class="subtitulo">
-Seleccione el modelo de calculadora de aire acondicionado Split
+Seleccione el diseño de calculadora Split
 </div>
 
-<!-- MENU PRINCIPAL -->
+<!-- MENU -->
 
 <div class="selector" id="menu">
 
@@ -143,15 +144,14 @@ Seleccione el modelo de calculadora de aire acondicionado Split
 
 <div class="card-content">
 
-<h2>Diseño 1 - Básico Profesional</h2>
+<h2>Diseño 1 - Básico</h2>
 
 <p>
-Calculadora simple y rápida.
-Ideal para relevamientos rápidos.
+Diseño rápido y práctico.
 </p>
 
 <button class="btn" onclick="abrirCalculadora(1)">
-ABRIR CALCULADORA
+ABRIR
 </button>
 
 </div>
@@ -165,15 +165,14 @@ ABRIR CALCULADORA
 
 <div class="card-content">
 
-<h2>Diseño 2 - Técnico Avanzado</h2>
+<h2>Diseño 2 - Técnico</h2>
 
 <p>
-Incluye fundamentos técnicos,
-flujo de cálculo y dibujo 3D.
+Con fundamentos técnicos y análisis.
 </p>
 
 <button class="btn" onclick="abrirCalculadora(2)">
-ABRIR CALCULADORA
+ABRIR
 </button>
 
 </div>
@@ -190,12 +189,11 @@ ABRIR CALCULADORA
 <h2>Diseño 3 - Premium PDF</h2>
 
 <p>
-Versión profesional premium.
-Incluye impresión automática en PDF.
+Diseño profesional con impresión PDF.
 </p>
 
 <button class="btn" onclick="abrirCalculadora(3)">
-ABRIR CALCULADORA
+ABRIR
 </button>
 
 </div>
@@ -203,14 +201,14 @@ ABRIR CALCULADORA
 
 </div>
 
-<!-- CONTENEDOR -->
+<!-- CALCULADORA -->
 
 <div id="calculadora">
 
 <div class="topbar">
 
 <button class="volver" onclick="volverMenu()">
-⬅ Volver al menú
+⬅ Volver
 </button>
 
 <button class="pdf" onclick="imprimirPDF()">
@@ -225,206 +223,12 @@ ABRIR CALCULADORA
 
 <script>
 
-function abrirCalculadora(tipo){
+function generarCalculadora(estilo){
 
-    document.getElementById("menu").style.display="none";
-    document.getElementById("calculadora").style.display="block";
-
-    let visor = document.getElementById("visor");
-
-    // OPCION 1
-
-    if(tipo == 1){
-
-        visor.srcdoc = `
+return `
 
 <!DOCTYPE html>
-<html>
-<head>
 
-<style>
-
-body{
-font-family:Arial;
-padding:20px;
-background:#f2f2f2;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-background:white;
-padding:25px;
-border-radius:10px;
-}
-
-h1{
-text-align:center;
-color:#0b2c74;
-}
-
-input{
-width:100%;
-padding:10px;
-margin-top:10px;
-}
-
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#0d6efd;
-color:white;
-border:none;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>CALCULADORA SPLIT - BÁSICA</h1>
-
-<label>Largo</label>
-<input>
-
-<label>Ancho</label>
-<input>
-
-<label>Altura</label>
-<input>
-
-<button>CALCULAR</button>
-
-</div>
-
-</body>
-</html>
-
-`;
-    }
-
-    // OPCION 2
-
-    if(tipo == 2){
-
-        visor.srcdoc = `
-
-<!DOCTYPE html>
-<html>
-<head>
-
-<style>
-
-body{
-font-family:Arial;
-background:#eef2f7;
-padding:20px;
-}
-
-.box{
-background:white;
-padding:20px;
-border-radius:12px;
-margin-bottom:20px;
-}
-
-h1{
-text-align:center;
-color:#0b2c74;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-
-canvas{
-background:white;
-border:1px solid #ccc;
-border-radius:10px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<h1>CALCULADORA TÉCNICA AVANZADA</h1>
-
-<div class="grid">
-
-<div class="box">
-
-<h2>Datos</h2>
-
-<label>Largo</label>
-<input type="number">
-
-<label>Ancho</label>
-<input type="number">
-
-<label>Altura</label>
-<input type="number">
-
-<br><br>
-
-<button style="padding:15px;width:100%;background:#0d6efd;color:white;border:none;">
-CALCULAR
-</button>
-
-</div>
-
-<div class="box">
-
-<h2>Esquema 3D</h2>
-
-<canvas width="500" height="350"></canvas>
-
-</div>
-
-</div>
-
-<div class="box">
-
-<h2>Fundamentos Técnicos</h2>
-
-<p>
-• BTU base = Superficie × 600
-</p>
-
-<p>
-• Personas adicionales = 600 BTU/h
-</p>
-
-<p>
-• Ventanas con sol directo = 1000 BTU/h
-</p>
-
-<p>
-• Orientación Oeste = +1500 BTU/h
-</p>
-
-</div>
-
-</body>
-</html>
-
-`;
-    }
-
-    // OPCION 3
-
-    if(tipo == 3){
-
-        visor.srcdoc = `
-
-<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -436,24 +240,18 @@ CALCULAR
 body{
 font-family:Arial;
 margin:0;
-background:#f3f5f7;
 padding:20px;
+background:${estilo == 1 ? "#f2f2f2" : estilo == 2 ? "#eef5ff" : "#f3f5f7"};
 }
 
-.titulo{
+h1{
 text-align:center;
-font-size:38px;
-font-weight:bold;
 color:#0b2c74;
-margin-bottom:20px;
 }
 
-.panel{
-background:white;
-border-radius:12px;
-padding:20px;
-box-shadow:0 3px 12px rgba(0,0,0,0.15);
-margin-bottom:20px;
+.container{
+max-width:1400px;
+margin:auto;
 }
 
 .grid{
@@ -462,42 +260,71 @@ grid-template-columns:1fr 1fr;
 gap:20px;
 }
 
-input, select{
+.panel{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 3px 12px rgba(0,0,0,0.12);
+}
+
+label{
+display:block;
+margin-top:12px;
+font-weight:bold;
+}
+
+input,select{
 width:100%;
 padding:10px;
-margin-top:8px;
-margin-bottom:15px;
+margin-top:6px;
 border-radius:6px;
 border:1px solid #ccc;
 }
 
 button{
 width:100%;
-padding:16px;
+padding:15px;
+margin-top:20px;
 background:#0d6efd;
-border:none;
 color:white;
-font-size:18px;
+border:none;
 border-radius:8px;
+font-size:18px;
+cursor:pointer;
 }
 
-.esquema{
-height:420px;
-background:linear-gradient(white,#dfe6e9);
+canvas{
+width:100%;
+background:white;
 border-radius:10px;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:28px;
-color:#777;
+}
+
+.resultado{
+margin-top:20px;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 3px 12px rgba(0,0,0,0.12);
 }
 
 .bloque{
 background:#f8fbff;
-border-left:6px solid #0d6efd;
-padding:18px;
+padding:15px;
+border-left:5px solid #0d6efd;
 margin-bottom:15px;
 border-radius:8px;
+}
+
+.ok{
+color:green;
+font-weight:bold;
+font-size:20px;
+}
+
+.warning{
+color:#d35400;
+font-weight:bold;
+font-size:20px;
 }
 
 @media print{
@@ -518,40 +345,55 @@ background:white;
 
 <body>
 
-<div class="titulo">
-CALCULADORA PREMIUM PDF
-</div>
+<h1>CURSO CLIMATIZACIÓN 2026 - VILLA DOLORES</h1>
+
+<div class="container">
 
 <div class="grid">
 
 <div class="panel">
 
-<h2>Relevamiento del ambiente</h2>
+<h2>RELEVAMIENTO DEL AMBIENTE</h2>
 
-<label>Largo</label>
-<input type="number">
+<label>Largo (m)</label>
+<input type="number" id="largo" step="0.01">
 
-<label>Ancho</label>
-<input type="number">
+<label>Ancho (m)</label>
+<input type="number" id="ancho" step="0.01">
 
-<label>Altura</label>
-<input type="number">
+<label>Altura (m)</label>
+<input type="number" id="altura" step="0.01">
 
-<label>Personas</label>
-<input type="number">
+<label>Personas habituales</label>
+<input type="number" id="personas">
 
-<label>Ventanas con sol</label>
-<input type="number">
+<label>Ventanas con sol directo</label>
+<input type="number" id="ventanas">
 
 <label>Orientación</label>
-<select>
+<select id="orientacion">
 <option>Sur</option>
 <option>Este</option>
 <option>Norte</option>
 <option>Oeste</option>
 </select>
 
-<button>
+<label>Equipos eléctricos</label>
+<input type="number" id="equipos">
+
+<label>Potencia equipo instalado (W)</label>
+<input type="number" id="watts">
+
+<label>Superficie vidriada (m²)</label>
+<input type="number" id="vidrio" step="0.01">
+
+<label>¿Sol por la tarde?</label>
+<select id="sol">
+<option>No</option>
+<option>Si</option>
+</select>
+
+<button onclick="calcular()">
 CALCULAR
 </button>
 
@@ -559,58 +401,362 @@ CALCULAR
 
 <div class="panel">
 
-<h2>Esquema 3D Profesional</h2>
+<h2>ESQUEMA 3D</h2>
 
-<div class="esquema">
-🏠 Esquema técnico 3D
-</div>
+<canvas id="canvas3d" width="600" height="450"></canvas>
 
 </div>
 
 </div>
 
-<div class="panel">
+<div class="resultado">
 
-<h2>Fundamentos y cálculos</h2>
+<h2>RESULTADOS Y FUNDAMENTOS</h2>
+
+<div id="resultado"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function dibujar3D(largo,ancho,altura){
+
+let canvas=document.getElementById("canvas3d");
+let ctx=canvas.getContext("2d");
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+let x=120;
+let y=120;
+
+let escala=40;
+
+let w=largo*escala;
+let d=ancho*escala;
+let h=altura*escala;
+
+ctx.fillStyle="#dfe6e9";
+
+ctx.beginPath();
+ctx.moveTo(x,y);
+ctx.lineTo(x+w,y);
+ctx.lineTo(x+w+80,y-40);
+ctx.lineTo(x+80,y-40);
+ctx.closePath();
+ctx.fill();
+
+ctx.fillStyle="#f5f6fa";
+
+ctx.fillRect(x,y,w,h);
+
+ctx.fillStyle="#dcdde1";
+
+ctx.beginPath();
+ctx.moveTo(x+w,y);
+ctx.lineTo(x+w+80,y-40);
+ctx.lineTo(x+w+80,y+h-40);
+ctx.lineTo(x+w,y+h);
+ctx.closePath();
+ctx.fill();
+
+ctx.strokeStyle="#2f3640";
+ctx.lineWidth=2;
+
+ctx.strokeRect(x,y,w,h);
+
+ctx.beginPath();
+ctx.moveTo(x+w,y);
+ctx.lineTo(x+w+80,y-40);
+ctx.lineTo(x+w+80,y+h-40);
+ctx.lineTo(x+w,y+h);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(x,y);
+ctx.lineTo(x+80,y-40);
+ctx.lineTo(x+w+80,y-40);
+ctx.stroke();
+
+ctx.fillStyle="blue";
+ctx.font="18px Arial";
+ctx.fillText("Largo: "+largo+" m",x+70,y+h+35);
+
+ctx.fillStyle="green";
+ctx.fillText("Ancho: "+ancho+" m",x+w+10,y+h);
+
+ctx.fillStyle="red";
+ctx.fillText("Altura: "+altura+" m",x-100,y+h/2);
+
+}
+
+function calcular(){
+
+let largo=parseFloat(document.getElementById("largo").value)||0;
+let ancho=parseFloat(document.getElementById("ancho").value)||0;
+let altura=parseFloat(document.getElementById("altura").value)||0;
+
+let personas=parseInt(document.getElementById("personas").value)||0;
+let ventanas=parseInt(document.getElementById("ventanas").value)||0;
+
+let orientacion=document.getElementById("orientacion").value;
+
+let equipos=parseInt(document.getElementById("equipos").value)||0;
+
+let watts=parseFloat(document.getElementById("watts").value)||0;
+
+let vidrio=parseFloat(document.getElementById("vidrio").value)||0;
+
+let sol=document.getElementById("sol").value;
+
+// SUPERFICIE
+
+let superficie=largo*ancho;
+
+// VOLUMEN
+
+let volumen=largo*ancho*altura;
+
+// BTU BASE
+
+let btuBase=superficie*600;
+
+// PERSONAS
+
+let btuPersonas=0;
+
+if(personas>2){
+
+btuPersonas=(personas-2)*600;
+
+}
+
+// VENTANAS
+
+let btuVentanas=ventanas*1000;
+
+// VIDRIO
+
+let btuVidrio=vidrio*800;
+
+// EQUIPOS
+
+let btuEquipos=equipos*500;
+
+// ORIENTACION
+
+let btuOrientacion=0;
+
+if(orientacion=="Este"){
+btuOrientacion=500;
+}
+
+if(orientacion=="Norte"){
+btuOrientacion=1000;
+}
+
+if(orientacion=="Oeste"){
+btuOrientacion=1500;
+}
+
+// SOL TARDE
+
+let btuSol=0;
+
+if(sol=="Si"){
+btuSol=1500;
+}
+
+// ADICIONALES
+
+let adicionales=
+btuPersonas+
+btuVentanas+
+btuVidrio+
+btuEquipos+
+btuOrientacion+
+btuSol;
+
+// TOTAL
+
+let totalBTU=btuBase+adicionales;
+
+// FRIGORIAS
+
+let frigorias=totalBTU/4;
+
+// EQUIPO
+
+let btuEquipo=watts*3.412;
+
+// DIAGNOSTICO
+
+let diagnostico="";
+let clase="";
+
+if(
+btuEquipo>=totalBTU*0.9 &&
+btuEquipo<=totalBTU*1.1
+){
+
+diagnostico="✅ ADECUADO";
+clase="ok";
+
+}else if(btuEquipo<totalBTU*0.9){
+
+diagnostico="⚠️ SUBDIMENSIONADO";
+clase="warning";
+
+}else{
+
+diagnostico="⚠️ SOBREDIMENSIONADO";
+clase="warning";
+
+}
+
+// DIBUJO
+
+dibujar3D(largo,ancho,altura);
+
+// RESULTADOS
+
+document.getElementById("resultado").innerHTML=`
 
 <div class="bloque">
-<h3>BTU Base</h3>
-BTU = Superficie × 600
+
+<h3>1. SUPERFICIE</h3>
+
+${largo} × ${ancho} =
+<b>${superficie.toFixed(2)} m²</b>
+
 </div>
 
 <div class="bloque">
-<h3>Factores adicionales</h3>
-Personas, radiación solar,
-vidrios y equipos eléctricos.
+
+<h3>2. VOLUMEN</h3>
+
+${largo} × ${ancho} × ${altura} =
+<b>${volumen.toFixed(2)} m³</b>
+
 </div>
 
 <div class="bloque">
-<h3>Diagnóstico</h3>
-Adecuado / Subdimensionado / Sobredimensionado
+
+<h3>3. BTU BASE</h3>
+
+${superficie.toFixed(2)} × 600 =
+<b>${btuBase.toFixed(0)} BTU/h</b>
+
+</div>
+
+<div class="bloque">
+
+<h3>4. FACTORES ADICIONALES</h3>
+
+Personas:
+${btuPersonas.toFixed(0)} BTU/h
+<br><br>
+
+Ventanas:
+${btuVentanas.toFixed(0)} BTU/h
+<br><br>
+
+Vidrios:
+${btuVidrio.toFixed(0)} BTU/h
+<br><br>
+
+Equipos:
+${btuEquipos.toFixed(0)} BTU/h
+<br><br>
+
+Orientación:
+${btuOrientacion.toFixed(0)} BTU/h
+<br><br>
+
+Sol tarde:
+${btuSol.toFixed(0)} BTU/h
+<br><br>
+
+<b>Total adicionales:
+${adicionales.toFixed(0)} BTU/h</b>
+
+</div>
+
+<div class="bloque">
+
+<h3>5. TOTAL REQUERIDO</h3>
+
+${btuBase.toFixed(0)} +
+${adicionales.toFixed(0)} =
+<b>${totalBTU.toFixed(0)} BTU/h</b>
+
+</div>
+
+<div class="bloque">
+
+<h3>6. FRIGORÍAS</h3>
+
+${totalBTU.toFixed(0)} ÷ 4 =
+<b>${frigorias.toFixed(0)} fg/h</b>
+
+</div>
+
+<div class="bloque">
+
+<h3>7. EQUIPO INSTALADO</h3>
+
+${watts} × 3.412 =
+<b>${btuEquipo.toFixed(0)} BTU/h</b>
+
+</div>
+
+<div class="bloque">
+
+<h3>8. DIAGNÓSTICO</h3>
+
+<div class="${clase}">
+${diagnostico}
 </div>
 
 </div>
+
+`;
+
+}
+
+</script>
 
 </body>
 </html>
 
 `;
-    }
+
+}
+
+function abrirCalculadora(tipo){
+
+document.getElementById("menu").style.display="none";
+
+document.getElementById("calculadora").style.display="block";
+
+document.getElementById("visor").srcdoc=
+generarCalculadora(tipo);
 
 }
 
 function volverMenu(){
 
-    document.getElementById("menu").style.display="grid";
-    document.getElementById("calculadora").style.display="none";
+document.getElementById("menu").style.display="grid";
+
+document.getElementById("calculadora").style.display="none";
 
 }
 
 function imprimirPDF(){
 
-    let frame = document.getElementById("visor");
-
-    frame.contentWindow.print();
+document.getElementById("visor")
+.contentWindow.print();
 
 }
 
